@@ -1,0 +1,5 @@
+{
+ "name": "claude-dev-kit",
+ "owner": { "name": "Ben Parisi" },
+ "plugins": [ { "name": "claude-dev-kit", "source": "./", "description": "Efficient multi-agent development: two skills and a launch guard." } ]
+}
