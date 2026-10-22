@@ -1,4 +1,4 @@
-# claude-dev-kit
+# agent-dev-kit
 
 Efficient multi-agent development with Claude Code, distilled from building a multiplayer game with a coordinator
 session, many parallel agents and a GitHub Project board (October 2026).
@@ -16,11 +16,11 @@ session, many parallel agents and a GitHub Project board (October 2026).
 From this repository's marketplace:
 
 ```
-/plugin marketplace add <owner>/claude-dev-kit
-/plugin install claude-dev-kit@claude-dev-kit
+/plugin marketplace add <owner>/agent-dev-kit
+/plugin install agent-dev-kit@agent-dev-kit
 ```
 
-Or try it locally without installing: `claude --plugin-dir /path/to/claude-dev-kit`.
+Or try it locally without installing: `claude --plugin-dir /path/to/agent-dev-kit`.
 
 ## Use
 

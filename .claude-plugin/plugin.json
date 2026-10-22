@@ -1,6 +1,8 @@
 {
- "name": "claude-dev-kit",
+ "name": "agent-dev-kit",
  "version": "0.1.0",
  "description": "Efficient multi-agent development in Claude Code: the efficient-agent-dev and github-project-board skills, plus a guard that blocks Workflow launches in turns a person started and flags agents launched without an explicit model.",
- "author": { "name": "Ben Parisi" }
+ "author": {
+  "name": "Ben Parisi"
+ }
 }

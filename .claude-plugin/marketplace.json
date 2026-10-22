@@ -1,5 +1,14 @@
 {
- "name": "claude-dev-kit",
- "owner": { "name": "Ben Parisi" },
- "plugins": [ { "name": "claude-dev-kit", "source": "./", "description": "Efficient multi-agent development: two skills and a launch guard." } ]
+ "name": "agent-dev-kit",
+ "owner": {
+  "name": "Ben Parisi"
+ },
+ "plugins": [
+  {
+   "name": "agent-dev-kit",
+   "source": "./",
+   "description": "Efficient multi-agent development: two skills and a launch guard."
+  }
+ ],
+ "description": "Efficient multi-agent development with Claude Code: skills for cheap parallel agent work and GitHub Project boards, plus a launch guard."
 }
