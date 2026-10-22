@@ -91,6 +91,7 @@ with the human): `references/coordinator.md`.
 - [ ] Prompts say "never `git stash`" (the stash list is shared by all worktrees)?
 - [ ] Work is resumable? Usage limits and network drops kill agents mid-task; keep state in issues, branches and files.
 - [ ] Not more than about 12 agents hitting the GitHub API at once (rate limits)?
+- [ ] Workflow scripts and their inputs saved in the project (git-ignored), not in the session's temporary folder?
 
 More gotchas, each from a real incident: `references/gotchas.md`.
 
