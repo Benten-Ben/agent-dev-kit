@@ -4,5 +4,7 @@
  "description": "Efficient multi-agent development in Claude Code: the efficient-agent-dev and github-project-board skills, plus a guard that blocks Workflow launches in turns a person started and flags agents launched without an explicit model.",
  "author": {
   "name": "Ben Parisi"
- }
+ },
+ "license": "MIT",
+ "repository": "https://github.com/Benten-Ben/agent-dev-kit"
 }

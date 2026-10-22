@@ -41,3 +41,7 @@ Replace the project specifics in the templates (test commands, how issues are cl
 claude plugin validate .
 claude plugin test .        # the launch guard's tests (tests/guard.test.ts)
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
