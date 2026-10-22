@@ -43,3 +43,24 @@ tests in the foreground and commit before returning.
 
 **Cleanup on shared machines may need the human.** A permission classifier can (rightly) block bulk deletes on shared boxes.
 Write a dry-run-by-default cleanup script the human runs, rather than working around the block.
+
+**The session's scratchpad isn't durable.** During a four-day pause, macOS cleaned the session's temporary folder
+(`/private/tmp/...`) of idle files: the helper that lets a new agent pick up a stopped one, a patched workflow script,
+and half of a test virtualenv's packages. Keep workflow scripts, helpers, run inputs and test environments in a
+git-ignored folder inside the project (e.g. `data/dev/wf/`), never in the scratchpad.
+
+**Resuming a workflow after a long pause can re-run finished work.** `resumeFromRunId` reused the finished builds but
+started finished *reviews* again as new agents (their cache keys no longer matched), which would have re-fixed work
+that was already merged. After anything longer than a short interruption, write a fresh, small workflow that reads
+the old run's results from its `journal.jsonl` through a file (not through large `args`), and check the journal for
+unexpected `started` lines right after any resume.
+
+**Browser tests time out on a busy machine.** On a laptop shared with other sessions' browsers, specs failed by
+timeout again and again at a load average of 20–150; the same specs passed at about 10. Check `uptime` before a
+browser run, run one spec run at a time behind a lock, and rerun a timeout-only failure at low load before calling
+it a regression.
+
+**A symlinked `node_modules` in a worktree leaks into the primary checkout.** SvelteKit writes its generated
+tsconfig into `node_modules/$app/`; through a symlink, `svelte-check` resolved paths into the primary checkout (24 false
+`./$types` errors) and the worktree's build rewrote the primary's generated files. Give each worktree its own copy; on
+APFS, `cp -cR` makes it nearly free.

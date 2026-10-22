@@ -26,8 +26,22 @@ Useful extra fields (single-select, set from labels by a sync script if you like
 gh project field-create <number> --owner <owner> --name "Size" --data-type SINGLE_SELECT --single-select-options "S,M,L"
 ```
 
+**Setting the Status options from the command line** (the field's id comes from `gh project field-list`):
+
+```bash
+gh api graphql -f f=<status field id> -f query='mutation($f:ID!){updateProjectV2Field(input:{fieldId:$f,
+  singleSelectOptions:[{name:"Backlog",color:GRAY,description:""},{name:"Ready",color:BLUE,description:""},
+  {name:"In progress",color:YELLOW,description:""},{name:"In review",color:PURPLE,description:""},
+  {name:"Done",color:GREEN,description:""}]}){projectV2Field{... on ProjectV2SingleSelectField{options{name}}}}}'
+```
+
+Replacing the options gives them new ids, so **every built-in workflow that set a Status loses its value and is left
+off**. Set the options first, then the workflows.
+
 **Built-in workflows** (project → ⋯ → Workflows): turn on "Item added → Backlog", "Item closed → Done", and
 "Pull request merged → Done". Optionally turn on "Auto-add to project" with a filter such as `is:issue is:open`.
+Its repository picker defaults to one of the owner's repositories, not necessarily this one: check it. The workflows
+have no API; a session driving the owner's browser can set them (Edit → the value → "Save and turn on workflow").
 
 ## 3. Labels
 

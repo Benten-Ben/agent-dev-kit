@@ -22,6 +22,10 @@ From this repository's marketplace:
 
 Or try it locally without installing: `claude --plugin-dir /path/to/agent-dev-kit`.
 
+If `claude plugin list` reports the plugin as **failed to load** with a hook error ("expected record"), check
+`claude --version`: an old local install (`~/.claude/local/claude`) predates hook modules and misreports it, while a
+current Claude Code loads it. Update or remove the old CLI.
+
 ## Use
 
 - Say "use efficient-agent-dev to plan this", or just ask for agent work. The skill loads when the work matches.

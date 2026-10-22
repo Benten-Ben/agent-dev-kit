@@ -40,6 +40,8 @@ If a session-level mode tells you to use workflows for every task, these efficie
 - After an interruption, list what stopped. For each: what the worktree holds, whether a PR exists, and what CI says.
   Relaunch with precheck off and a comment telling the builder to review the leftover edits.
 - A CI job killed by a runner shutdown isn't a code failure: confirm from the job log, then rerun.
+- After a pause longer than a few hours, don't resume a workflow run: start a fresh one from the old run's journal
+  (see gotchas.md).
 
 ## What stays with the human
 
