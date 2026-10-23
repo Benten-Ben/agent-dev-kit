@@ -64,3 +64,39 @@ it a regression.
 tsconfig into `node_modules/$app/`; through a symlink, `svelte-check` resolved paths into the primary checkout (24 false
 `./$types` errors) and the worktree's build rewrote the primary's generated files. Give each worktree its own copy; on
 APFS, `cp -cR` makes it nearly free.
+
+**A message that arrives mid-turn makes the turn a person's.** A user message delivered while the coordinator was
+working counts as starting the turn, so a Workflow launched later in that same turn would relay it, and the launch guard
+refuses it. Reply, start the `sleep 15; echo trigger` timer again, and launch from its notification.
+
+**The instructions file is paid on every call of every agent.** Each agent starts with the project's CLAUDE.md (and the
+other instructions) in its context, and re-reads its whole context on every model call. On one project a 300 KB
+CLAUDE.md put every agent's first call at about 140k tokens before any work. Keep it short, move dated status and
+history to other files, and measure with `scripts/measure-usage.py`.
+
+**Agent-driven PRs multiply CI minutes, and a failed payment stops every hosted job.** Each push to a PR re-runs CI, and
+every job is billed rounded up to the minute, so a month of agent PRs on a private repo can pass GitHub Free's 2,000
+minutes. When the overage charge then failed, GitHub stopped starting hosted jobs on that account ("recent account
+payments have failed or your spending limit needs to be increased"), and the nightly backup and monitors went quiet with
+it. Run CI only on PRs marked ready (`types: [opened, synchronize, reopened, ready_for_review]` and `if:
+github.event.pull_request.draft == false`), set the spending limit to $0 so running out pauses instead of charging, and
+have something outside GitHub notice a backup that stopped.
+
+**Self-hosted runners keep working when hosted jobs are blocked, with three cautions.** On a personal account a runner
+serves one repository (only an organization can share runners across repos), so "use the existing runners" means a new
+runner instance per repo. Keep runners that run PR code apart from jobs that hold real secrets (a separate runner, or
+at least a separate user, for the backup or deploy), and off any host where the runner's user can reach production (a
+runner user in the docker group of production's daemon is root over it). Never put a self-hosted runner on a public
+repo without fork-PR protection: approval for outside collaborators, a head-repo check in the job, and a root-owned
+job-started hook set in the service unit (`ACTIONS_RUNNER_HOOK_JOB_STARTED`), failing closed.
+
+**A Node "is this the main module" guard can be false on macOS.** `import.meta.url === pathToFileURL(process.argv[1]).href`
+fails when the script is run through a symlinked path: `/var` and `/tmp` are symlinks to `/private`, and Node resolves
+the module's URL through them while `argv[1]` keeps the path as typed. The script then does nothing and exits 0. Compare
+real paths (`fs.realpathSync` on both sides), and have the caller treat empty output as a failure.
+
+**A check run without its environment looks like a regression.** A worktree with no `.env` sent to a remote runner gave
+six "new" type errors (the framework's public env module had no Supabase URL) and a data-dependent test failure; with the
+public values in place, both were clean. Before calling a red run a regression, check that the run had the project's
+public env, and keep a copy of the public-only values with the runner's tooling so every run gets them.
+
