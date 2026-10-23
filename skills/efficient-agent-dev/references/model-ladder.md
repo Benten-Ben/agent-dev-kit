@@ -25,9 +25,19 @@ Measured on the Parkmates project (Godot/GDScript multiplayer game, two maintain
 | **Fable is never worth it** | Higher cost, no quality gain on any measured role. |
 | **Cheap reviews miss seams in big plans** | A 20-item breakdown: Haiku plan, Haiku shape review, Haiku per-item reviews and a Haiku revision; then one Opus-medium review still found 7 blockers and ~15 majors, almost all at the seams between items or in values only computing reveals. |
 
+## A second project's baseline (a website, October 2026)
+
+- Before adopting these rules: 46 workflows ran 303 agents in ten days, every one on Opus at xhigh. An agent averaged
+  about 93 model calls and about 29 million cache-read tokens; its first call already held about 140k tokens, most of
+  it the project's instructions file.
+- The first chunk under the rules (a check of a 223-row backlog: eight Sonnet-medium readers and one Opus-high critic)
+  averaged about 14 calls and 2.4 million cache-read tokens per agent, and the owner accepted the result unchanged.
+- Measured with `scripts/measure-usage.py`, which reads the agents' own transcripts.
+
 ## Rules of thumb
 
 - **Price ratios** (approximate): Opus ≈ 40× Haiku, Sonnet ≈ 20× Haiku.
 - **Escalate one rung at a time**, and only for the role and tier where the cheaper rung failed.
 - **Keep model selection open to evidence.** Record each change as a short decision with the run that justified it.
+- **Measure, don't estimate:** `scripts/measure-usage.py` prints agents, models, calls and tokens per workflow run.
 - **The orchestrator can stay strong** (it holds the context and makes the calls); it's the helpers that must be cheap.

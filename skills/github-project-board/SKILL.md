@@ -15,6 +15,8 @@ up work without asking.
    elsewhere (a doc list, a review finding, a "later" in a PR) becomes an issue.
 2. **Every issue is a work order** (template in `templates/task.md`): Goal, Acceptance (pass/fail), Owns (files it may
    change), Depends on, Context. A good work order is what lets a cheap agent build it.
+   Questions only people can answer are the exception: one checklist issue per person who owes answers, and an answer
+   that needs code becomes its own work order (`references/setup.md` §7, moving an existing list onto the board).
 3. **Claim before you work** (`board claim <n>`): assigns you and sets "In progress". Someone else's claim is theirs
    unless it's clearly stale.
 4. **Status flow:** Backlog → Ready → In progress → In review → Done. "Ready" means fully specified and unblocked.
@@ -51,7 +53,8 @@ exact `gh` commands it would run.
 
 ## References
 
-- `references/setup.md`: creating the project, fields, labels, templates and views; `gh` auth scopes.
+- `references/setup.md`: creating the project, fields, labels, templates, the built-in workflows' settings, views (what
+  the API sets and what needs the browser), and moving an existing to-do list onto the board; `gh` auth scopes.
 - `references/operations.md`: a cookbook of `gh` and GraphQL commands (sub-issues, dependencies, fields, bulk edits).
 - `references/gotchas.md`: things that bit us.
 

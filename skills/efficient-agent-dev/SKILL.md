@@ -92,11 +92,12 @@ with the human): `references/coordinator.md`.
 - [ ] Work is resumable? Usage limits and network drops kill agents mid-task; keep state in issues, branches and files.
 - [ ] Not more than about 12 agents hitting the GitHub API at once (rate limits)?
 - [ ] Workflow scripts and their inputs saved in the project (git-ignored), not in the session's temporary folder?
+- [ ] Did a person's message arrive during this turn? Then it is theirs: restart the timer and launch from its notification.
 
 More gotchas, each from a real incident: `references/gotchas.md`.
 
-The numbers here were measured in October 2026 on one project. Models and prices change, so re-measure before trusting a
-ratio, and record what you find.
+The numbers here were measured in October 2026 on two projects. Models and prices change, so re-measure before trusting a
+ratio (`scripts/measure-usage.py` reads your agents' transcripts), and record what you find.
 
 ## Adapting this to your project
 

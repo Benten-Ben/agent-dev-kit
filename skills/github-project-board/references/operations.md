@@ -55,6 +55,32 @@ gh api graphql -f query='query{repository(owner:"OWNER",name:"REPO"){issue(numbe
 
 `board block`, `board unblock`, `board blockers` and `board sync-blocked` wrap these.
 
+## Views
+
+```bash
+gh api graphql -f query='mutation($p:ID!,$n:String!){createProjectV2View(input:{projectId:$p,name:$n,layout:TABLE_LAYOUT}){projectV2View{id number}}}' \
+  -f p=<project id> -f n="Ready queue"
+gh api graphql -f query='mutation($v:ID!,$f:String,$c:[ID!]!){updateProjectV2View(input:{viewId:$v,filter:$f,configuration:{visibleFieldIds:$c}}){projectV2View{name filter}}}' \
+  -f v=<view id> -f f='status:Ready -label:blocked' -f 'c[]=<field id>' -f 'c[]=<field id>'
+gh api graphql -f query='query{user(login:"OWNER"){projectV2(number:N){views(first:20){nodes{number name layout filter}}}}}'
+```
+
+Grouping is browser-only (setup.md §5).
+
+## Built-in workflows (read only)
+
+```bash
+gh api graphql -f query='query{user(login:"OWNER"){projectV2(number:N){workflows(first:30){nodes{name enabled}}}}}' \
+  -q '[.data.user.projectV2.workflows.nodes[]|select(.enabled)|.name]'
+```
+
+## Milestones
+
+```bash
+gh api -X POST repos/$R/milestones -f title="Release 1" -f description="…"
+gh issue edit 123 -R $R --milestone "Release 1"
+```
+
 ## Rate limits
 
 ```bash
