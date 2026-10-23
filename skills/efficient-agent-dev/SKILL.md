@@ -68,14 +68,19 @@ Evidence behind these picks: `references/model-ladder.md`.
 
 ## Launching a template
 
-Copy a template into the project (e.g. `tools/agent-workflows/`) and adapt it, or run it straight from here with an
-**absolute** path (`~` is not expanded):
+Copy a template into the project (e.g. `tools/agent-workflows/`) and adapt it, then run it by its **absolute** path
+(`~` is not expanded):
 
 ```
-Workflow({ scriptPath: "/Users/<you>/.claude/skills/efficient-agent-dev/templates/build-unit.js",
+Workflow({ scriptPath: "/abs/path/to/project/tools/agent-workflows/build-unit.js",
            args: { repo: "owner/name", issue: 123, base: "main", wt: "/abs/path/.claude/worktrees/i123",
                    test_cmd: "npm test -- path/to/affected.test.js", tier: "standard" } })
 ```
+
+The Workflow tool may refuse a `scriptPath` outside the working directory and the directories added to the session,
+which includes this plugin's own folder. Then copy the template into the project, or pass its whole text as `script`.
+Write `model` and `effort` literally in each `agent()` call: the launch guard reads the script's text, so a value spread
+from a helper (`...cellsFor(role)`) reads to it as missing.
 
 Where the work comes from and goes back to (issues as work orders, claiming, sub-issues, "blocked by" links, gate issues): the **github-project-board** skill.
 

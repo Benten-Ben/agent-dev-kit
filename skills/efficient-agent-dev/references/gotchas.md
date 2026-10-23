@@ -89,3 +89,14 @@ at least a separate user, for the backup or deploy), and off any host where the 
 runner user in the docker group of production's daemon is root over it). Never put a self-hosted runner on a public
 repo without fork-PR protection: approval for outside collaborators, a head-repo check in the job, and a root-owned
 job-started hook set in the service unit (`ACTIONS_RUNNER_HOOK_JOB_STARTED`), failing closed.
+
+**A Node "is this the main module" guard can be false on macOS.** `import.meta.url === pathToFileURL(process.argv[1]).href`
+fails when the script is run through a symlinked path: `/var` and `/tmp` are symlinks to `/private`, and Node resolves
+the module's URL through them while `argv[1]` keeps the path as typed. The script then does nothing and exits 0. Compare
+real paths (`fs.realpathSync` on both sides), and have the caller treat empty output as a failure.
+
+**A check run without its environment looks like a regression.** A worktree with no `.env` sent to a remote runner gave
+six "new" type errors (the framework's public env module had no Supabase URL) and a data-dependent test failure; with the
+public values in place, both were clean. Before calling a red run a regression, check that the run had the project's
+public env, and keep a copy of the public-only values with the runner's tooling so every run gets them.
+

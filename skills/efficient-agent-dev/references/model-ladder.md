@@ -33,6 +33,10 @@ Measured on the Parkmates project (Godot/GDScript multiplayer game, two maintain
 - The first chunk under the rules (a check of a 223-row backlog: eight Sonnet-medium readers and one Opus-high critic)
   averaged about 14 calls and 2.4 million cache-read tokens per agent, and the owner accepted the result unchanged.
 - Measured with `scripts/measure-usage.py`, which reads the agents' own transcripts.
+- **One reviewer is not a critical review, again.** On the same project a harness PR (the build-unit script, path-based
+  review floors, merge helpers) passed its single Opus-high review after one fix round. The whole-PR critical review
+  (four Opus-high lenses and one skeptic) then confirmed 21 of its 24 findings, among them a blocker: the floor check
+  printed nothing on macOS, so no PR's review tier would ever have been raised.
 
 ## Rules of thumb
 
